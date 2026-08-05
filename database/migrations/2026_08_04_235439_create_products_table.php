@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('image');
             $table->integer('price');
             $table->integer('stock');
+              $table->string('image');
+            $table->foreignId('product_category_id')->constrained();
             $table->timestamps();
         });
     }
