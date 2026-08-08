@@ -10,7 +10,22 @@
                     <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kategori">Kategori</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+                    
+                     @if (Route::has('login'))
+                
+                    @auth
+                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
+                      
+                    @else
+                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Log in</a></li>
+                        
+                        @if (Route::has('register'))
+                         <li class="nav-item"><a class="nav-link"   href="{{ route('register') }}">Register</a></li>
+                           
+                        @endif
+                    @endauth
+               
+            @endif
                 </ul>
                 <form class="d-flex me-3">
                     <input class="form-control me-2" type="search" placeholder="Cari produk..." aria-label="Search">
