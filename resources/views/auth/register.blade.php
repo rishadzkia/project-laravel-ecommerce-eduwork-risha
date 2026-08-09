@@ -11,7 +11,7 @@
     <form method="POST" action="{{ route('register') }}" class="space-y-3">
         @csrf
 
-        <!-- Name -->
+        <!-- Name --> 
         <div>
             <x-input-label for="name" :value="__('Nama Lengkap')" class="text-xs" />
             <x-text-input id="name" class="block mt-1 w-full text-sm py-1.5" 
@@ -31,7 +31,7 @@
                           name="email" 
                           :value="old('email')" 
                           required autocomplete="username" 
-                          placeholder="email@contoh.com" />
+                          placeholder="email@gmail.com" />
             <x-input-error :messages="$errors->get('email')" class="mt-1 text-xs" />
         </div>
 
