@@ -12,9 +12,9 @@
             <!-- Header Card & Tombol Tambah -->
             <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0 fw-bold text-dark"></h5>
-                <button class="btn btn-primary btn-sm px-3 shadow-sm">
+                <a href="{{ route('category-products.tambah') }}" class="btn btn-primary btn-sm px-3 shadow-sm">
                     <i class="bi bi-plus-circle me-1"></i> Tambah Kategori
-                </button>
+                </a>
             </div> 
 
             <!-- Body Card & Tabel -->
@@ -41,9 +41,9 @@
     </td>
     <td class="text-center">
         <div class="d-inline-flex gap-1">
-            <button class="btn btn-sm btn-outline-primary px-2.5 py-1" title="Edit">
+            <a href="{{ route('category-products.edit', ['id']) }}" class="btn btn-sm btn-outline-primary px-2.5 py-1" title="Edit">
                 <i class="bi bi-pencil-square me-1"></i> Edit
-            </button>
+            </a>
             <button class="btn btn-sm btn-outline-danger px-2.5 py-1" title="Hapus">
                 <i class="bi bi-trash me-1"></i> Hapus
             </button>
@@ -79,7 +79,7 @@
     <td class="text-center">
         <span class="badge rounded-pill px-3 py-2 shadow-sm" style="background-color: #0f172a; color: #ffffff;">
             210
-        </span>
+        </span> 
     </td>
     <td class="text-center">
         <div class="d-inline-flex gap-1">

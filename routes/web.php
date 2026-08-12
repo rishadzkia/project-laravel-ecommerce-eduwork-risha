@@ -20,12 +20,28 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/products', function () {
+Route::get('/products', function () { 
     return view('dashboard.products.index');
 })->name('products');
+
+Route::get('/products/tambah', function () {
+    return view('dashboard.products.tambah');
+})->name('products.tambah');
+
+Route::get('/products/edit/{id}', function ($id) {
+    return view('dashboard.products.edit', compact('id'));
+})->name('products.edit');
 
 Route::get('/category-products', function () {
     return view('dashboard.category_products.index');
 })->name('category-products');
+
+Route::get('/category-products/tambah', function () {
+    return view('dashboard.category_products.tambah');
+})->name('category-products.tambah');
+
+Route::get('/category-products/edit/{id}', function ($id) {
+    return view('dashboard.category_products.edit', compact('id'));
+})->name('category-products.edit');
 
 require __DIR__.'/auth.php';
