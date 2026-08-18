@@ -19,12 +19,19 @@
 
                     <!-- Body Form -->
                     <div class="card-body p-4 p-md-5">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
                             
                             <!-- Nama Produk -->
                             <div class="mb-4">
                                 <label for="nama_produk" class="form-label fw-semibold" style="color: #0f172a;">Nama Produk</label>
-                                <input type="text" class="form-control form-control-lg fs-6" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk..." required autofocus>
+                               <input type="text" class="form-control form-control-lg fs-6"
+    id="nama_produk"
+    name="name"
+    value="{{ $product->name }}"
+    placeholder="Masukkan nama produk..."
+    required autofocus>
                             </div>
 
                             <!-- Grid 2 Kolom untuk Kategori & Gambar -->
@@ -32,17 +39,42 @@
                                 <!-- Kategori -->
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="kategori_id" class="form-label fw-semibold" style="color: #0f172a;">Kategori Produk</label>
-                                    <select class="form-select form-select-lg fs-6" id="kategori_id" name="kategori_id" required>
-                                        <option value="" selected disabled>-- Pilih Kategori --</option>
-                                        <option value="1">Pakaian Pria</option>
-                                        <option value="2">Elektronik</option>
-                                        <option value="3">Peralatan Rumah Tangga</option>
-                                    </select>
+                                    <select class="form-select form-select-lg fs-6"
+    id="kategori_id"
+    name="product_category_id"
+    required>
+
+    <option value="" disabled>-- Pilih Kategori --</option>
+
+    <option value="1" {{ $product->product_category_id == 1 ? 'selected' : '' }}>
+        Pakaian Pria
+    </option>
+
+    <option value="2" {{ $product->product_category_id == 2 ? 'selected' : '' }}>
+        Elektronik
+    </option>
+
+    <option value="3" {{ $product->product_category_id == 3 ? 'selected' : '' }}>
+        Peralatan Rumah Tangga
+    </option>
+</select>
                                 </div>
                                 <!-- Gambar -->
                                 <div class="col-md-6">
                                     <label for="gambar" class="form-label fw-semibold" style="color: #0f172a;">Foto Produk</label>
-                                    <input class="form-control form-control-lg fs-6" type="file" id="gambar" name="gambar" accept="image/*" required>
+                                   @if ($product->image)
+    <img src="{{ str_starts_with($product->image, 'http')
+        ? $product->image
+        : asset('storage/' . $product->image) }}"
+        alt="{{ $product->name }}"
+        width="100">
+@endif
+
+<input class="form-control form-control-lg fs-6"
+    type="file"
+    id="gambar"
+    name="image"
+    accept="image/*">
                                 </div>
                             </div>
 
@@ -53,20 +85,38 @@
                                     <label for="harga" class="form-label fw-semibold" style="color: #0f172a;">Harga (Rp)</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light fs-6">Rp</span>
-                                        <input type="number" class="form-control fs-6" id="harga" name="harga" placeholder="0" min="0" required>
+                                       <input type="number"
+    class="form-control fs-6"
+    id="harga"
+    name="price"
+    value="{{ $product->price }}"
+    placeholder="0"
+    min="0"
+    required>
                                     </div>
                                 </div>
                                 <!-- Stok -->
                                 <div class="col-md-6">
                                     <label for="stok" class="form-label fw-semibold" style="color: #0f172a;">Jumlah Stok</label>
-                                    <input type="number" class="form-control form-control-lg fs-6" id="stok" name="stok" placeholder="0" min="0" required>
+                                    <input type="number"
+    class="form-control form-control-lg fs-6"
+    id="stok"
+    name="stock"
+    value="{{ $product->stock }}"
+    placeholder="0"
+    min="0"
+    required>
                                 </div>
                             </div>
 
                             <!-- Deskripsi -->
                             <div class="mb-4">
                                 <label for="deskripsi" class="form-label fw-semibold" style="color: #0f172a;">Deskripsi Produk</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="5" placeholder="Tuliskan spesifikasi, keunggulan, atau detail lainnya tentang produk ini..." required></textarea>
+                                <textarea class="form-control"
+    id="deskripsi"
+    name="description"
+    rows="5"
+    required>{{ $product->description }}</textarea>
                             </div>
 
                             <!-- Area Tombol Aksi -->

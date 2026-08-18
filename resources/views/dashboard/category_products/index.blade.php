@@ -12,7 +12,7 @@
             <!-- Header Card & Tombol Tambah -->
             <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0 fw-bold text-dark"></h5>
-                <a href="{{ route('category-products.tambah') }}" class="btn btn-primary btn-sm px-3 shadow-sm">
+                <a href="{{ route('category-products.create') }}" class="btn btn-primary btn-sm px-3 shadow-sm">
                     <i class="bi bi-plus-circle me-1"></i> Tambah Kategori
                 </a>
             </div> 
@@ -29,77 +29,61 @@
                                 <th scope="col" class="text-center" width="25%">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                           <!-- Baris 1 -->
-<tr class="align-middle">
-    <td class="text-center fw-bold text-secondary">#001</td>
-    <td class="fw-semibold" style="color: #0f172a;">Pakaian Pria</td>
-    <td class="text-center">
-        <span class="badge rounded-pill px-3 py-2 shadow-sm" style="background-color: #0f172a; color: #ffffff;">
-            124
-        </span>
-    </td>
-    <td class="text-center">
-        <div class="d-inline-flex gap-1">
-            <a href="{{ route('category-products.edit', ['id']) }}" class="btn btn-sm btn-outline-primary px-2.5 py-1" title="Edit">
-                <i class="bi bi-pencil-square me-1"></i> Edit
-            </a>
-            <button class="btn btn-sm btn-outline-danger px-2.5 py-1" title="Hapus">
-                <i class="bi bi-trash me-1"></i> Hapus
-            </button>
-        </div>
-    </td>
-</tr>
+                       <tbody>
+    @foreach ($categories as $category)
+        <tr class="align-middle">
+            <td class="text-center fw-bold text-secondary">
+                #{{ $category->id }}
+            </td>
 
-<!-- Baris 2 -->
-<tr class="align-middle">
-    <td class="text-center fw-bold text-secondary">#002</td>
-    <td class="fw-semibold" style="color: #0f172a;">Elektronik</td>
-    <td class="text-center">
-        <span class="badge rounded-pill px-3 py-2 shadow-sm" style="background-color: #0f172a; color: #ffffff;">
-            85
-        </span>
-    </td>
-    <td class="text-center">
-        <div class="d-inline-flex gap-1">
-            <button class="btn btn-sm btn-outline-primary px-2.5 py-1" title="Edit">
-                <i class="bi bi-pencil-square me-1"></i> Edit
-            </button>
-            <button class="btn btn-sm btn-outline-danger px-2.5 py-1" title="Hapus">
-                <i class="bi bi-trash me-1"></i> Hapus
-            </button>
-        </div>
-    </td>
-</tr>
+            <td class="fw-semibold" style="color: #0f172a;">
+                {{ $category->name }}
+            </td>
 
-<!-- Baris 3 -->
-<tr class="align-middle">
-    <td class="text-center fw-bold text-secondary">#003</td>
-    <td class="fw-semibold" style="color: #0f172a;">Peralatan Rumah Tangga</td>
-    <td class="text-center">
-        <span class="badge rounded-pill px-3 py-2 shadow-sm" style="background-color: #0f172a; color: #ffffff;">
-            210
-        </span> 
-    </td>
-    <td class="text-center">
-        <div class="d-inline-flex gap-1">
-            <button class="btn btn-sm btn-outline-primary px-2.5 py-1" title="Edit">
-                <i class="bi bi-pencil-square me-1"></i> Edit
-            </button>
-            <button class="btn btn-sm btn-outline-danger px-2.5 py-1" title="Hapus">
-                <i class="bi bi-trash me-1"></i> Hapus
-            </button>
-        </div>
-    </td>
-</tr>
-                        </tbody>
+            <td class="text-center">
+                <span class="badge rounded-pill px-3 py-2 shadow-sm"
+                      style="background-color: #0f172a; color: #ffffff;">
+                    {{ $category->products_count }}
+                </span>
+            </td>
+
+            <td class="text-center">
+                <div class="d-inline-flex gap-1">
+                    <a href="{{ route('category-products.edit', $category->id) }}"
+                       class="btn btn-sm btn-outline-primary px-2.5 py-1"
+                       title="Edit">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </a>
+
+                    <form action="{{ route('category-products.destroy', $category->id) }}"
+      method="POST"
+      class="d-inline">
+
+    @csrf
+    @method('DELETE')
+
+    <button type="submit"
+            class="btn btn-sm btn-outline-danger px-2.5 py-1"
+            title="Hapus"
+            onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+        <i class="bi bi-trash me-1"></i> Hapus
+    </button>
+
+</form>
+                </div>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
                     </table>
                 </div>
             </div>
             
             <!-- Footer Card (Opsional: Untuk Pagination) -->
             <div class="card-footer bg-white py-3">
-                <p class="text-muted text-center mb-0" style="font-size: 0.875rem;">Menampilkan 3 dari 3 kategori</p>
+              <p class="text-muted text-center mb-0" style="font-size: 0.875rem;">
+    Menampilkan {{ $categories->count() }} dari {{ $categories->count() }} kategori
+</p>
             </div>
             
         </div>

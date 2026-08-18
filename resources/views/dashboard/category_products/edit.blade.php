@@ -17,12 +17,23 @@
 
                     <!-- Body Form -->
                     <div class="card-body p-4">
-                        <form action="#" method="POST">
+                        <form action="{{ route('category-products.update', $category->id) }}" method="POST">
+    @csrf
+    @method('PUT')
                             
                             <!-- Input Nama Kategori -->
                             <div class="mb-4">
                                 <label for="nama_kategori" class="form-label fw-semibold" style="color: #0f172a;">Nama Kategori</label>
-                                <input type="text" class="form-control form-control-lg fs-6" id="nama_kategori" name="nama_kategori" placeholder="Contoh: Pakaian Pria" required autofocus>
+                                <input
+    type="text"
+    class="form-control form-control-lg fs-6"
+    id="nama_kategori"
+    name="name"
+    value="{{ $category->name }}"
+    placeholder="Contoh: Pakaian Pria"
+    required
+    autofocus
+>
                                 <div class="form-text text-muted mt-2" style="font-size: 0.85rem;">
                                     Masukkan nama kategori yang singkat dan jelas.
                                 </div>
